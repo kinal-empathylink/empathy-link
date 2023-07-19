@@ -10,6 +10,7 @@ export async function POST(req: NextRequest) {
   try {
     const json: IUser = await req.json();
 
+      console.log({JSON: json})
     const parse = JSON.parse(JSON.stringify(json));
 
     console.log({ PARSE: parse });

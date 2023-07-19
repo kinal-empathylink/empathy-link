@@ -1,28 +1,40 @@
 "use client";
 
-import React, { MouseEvent, useRef } from "react";
-import { signIn } from "next-auth/react";
+import React, { MouseEvent, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { AiOutlineMail } from 'react-icons/ai';
 import { BiSolidLockAlt } from 'react-icons/bi';
+import { LoginAction } from "@/app/api/login/Actions";
+import { useRouter } from "next/navigation";
 
 const LoginClient = () => {
   const inputUsername = useRef("");
   const inputPassword = useRef("");
+  const [responseError, setResponseError] = useState("");
+
+  const router = useRouter();
 
   const onSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    console.log({ user: inputUsername.current, pass: inputPassword.current });
+    const data = { 
+        username: inputUsername.current, 
+        password: inputPassword.current 
+    }
 
-    const result = await signIn("credentials", {
-      username: inputUsername.current,
-      password: inputPassword.current,
-      redirect: true,
-      callbackUrl: "/home",
-    });
+    console.log(data);
 
-    console.log({ result: result });
+    const result = await LoginAction(data)
+
+    console.log({RESULT: result})
+
+    if (!result.username) {
+        setResponseError(`${result.message}`)
+        router.push("/auth/Login");
+      } else{
+        router.push("/auth/Signup");
+      }
+
   };
   return (
     <div className="flex h-screen w-full">
@@ -84,11 +96,18 @@ const LoginClient = () => {
                                     type="password"
                                     name="username"
                                     id="username"
-                                    onChange={(e) => (inputUsername.current = e.target.value)}
+                                    onChange={(e) => (inputPassword.current = e.target.value)}
                                     className="focus:outline-gray-400 border border-l-0 font-extralight border-gray-200 text-sm max-sm:text-xs rounded-full rounded-l-none w-80 h-14 max-lg:w-96 max-lg:h-16 max-sm:w-56 max-sm:h-10"
                                     placeholder="Contraseña"
                                 />
                             </div>
+                            
+                            {responseError !== "" ? (
+                                <h1 className="text-red-600 text-sm px-2 font-medium italic">
+                                {responseError}
+                                </h1>
+                            ) : null}
+
                             <button
                                 type="submit"
                                 onClick={(e) => onSubmit(e)}

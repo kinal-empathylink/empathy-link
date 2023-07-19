@@ -37,7 +37,6 @@ function SignUpForm() {
       setResponseError(`${response.message}`)
     }
 
-
   };
     
   return (
@@ -73,6 +72,11 @@ function SignUpForm() {
                             Inicia sesión para comenzar
                         </div>
                     </div>
+                    {responseError !== '' ? (
+                        <h1 className="text-red-600 text-sm px-2 font-medium italic">
+                        {responseError}
+                        </h1>
+                    ) : null}
                     <div>
                         <form className='space-y-6'>
                                 <div className="flex">
@@ -85,7 +89,9 @@ function SignUpForm() {
                                       type="text"
                                       name="names"
                                       id="names"
-                                      //onChange={(e) => (inputUsername.current = e.target.value)}
+                                      onChange={(
+                                        e: React.ChangeEvent<HTMLInputElement>,
+                                      ) => setData({ ...data, name: e.target.value })}
                                       className="focus:outline-gray-400 border border-l-0 font-extralight border-gray-200 text-sm max-sm:text-xs rounded-full rounded-l-none w-80 h-14 max-lg:w-96 max-lg:h-16 max-sm:w-56 max-sm:h-10"
                                       placeholder="Nombre completo"
                                   />
@@ -100,7 +106,9 @@ function SignUpForm() {
                                       type="text"
                                       name="username"
                                       id="username"
-                                      //onChange={(e) => (inputUsername.current = e.target.value)}
+                                      onChange={(
+                                        e: React.ChangeEvent<HTMLInputElement>,
+                                      ) => setData({ ...data, username: e.target.value })}
                                       className="focus:outline-gray-400 border border-l-0 font-extralight border-gray-200 text-sm max-sm:text-xs rounded-full rounded-l-none w-80 h-14 max-lg:w-96 max-lg:h-16 max-sm:w-56 max-sm:h-10"
                                       placeholder="Nombre de Usuario"
                                   />
@@ -115,7 +123,9 @@ function SignUpForm() {
                                       type="email"
                                       name="email"
                                       id="email"
-                                      //onChange={(e) => (inputUsername.current = e.target.value)}
+                                      onChange={(
+                                        e: React.ChangeEvent<HTMLInputElement>,
+                                      ) => setData({ ...data, email: e.target.value })}
                                       className="focus:outline-gray-400 border border-l-0 font-extralight border-gray-200 text-sm max-sm:text-xs rounded-full rounded-l-none w-80 h-14 max-lg:w-96 max-lg:h-16 max-sm:w-56 max-sm:h-10"
                                       placeholder="Correo electrónico"
                                   />
@@ -130,7 +140,9 @@ function SignUpForm() {
                                       type="text"
                                       name="password"
                                       id="password"
-                                      //onChange={(e) => (inputUsername.current = e.target.value)}
+                                      onChange={(
+                                        e: React.ChangeEvent<HTMLInputElement>,
+                                      ) => setData({ ...data, password: e.target.value })}
                                       className="focus:outline-gray-400 border border-l-0 font-extralight border-gray-200 text-sm max-sm:text-xs rounded-full rounded-l-none w-80 h-14 max-lg:w-96 max-lg:h-16 max-sm:w-56 max-sm:h-10"
                                       placeholder="Contraseña"
                                   />
