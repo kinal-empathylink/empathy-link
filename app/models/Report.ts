@@ -1,16 +1,16 @@
 import { Document, Schema, model, models } from "mongoose";
 import { IInjurie } from "./Injuries";
 import { IIncident } from "./Incidents";
+import { IGrade } from "./Grade";
 
 // Interface for Report document
 export interface IReport extends Document {
   age: number;
-  grade: string;
-  school: string;
+  grade: IGrade["_id"];
   incidentDate: Date;
   description: string;
   witnesses: string;
-  incidentType: IIncident["_id"];
+  incidentType: IIncident[];
   injuries: IInjurie[];
   previousIncidents: string;
   emotionalImpact: string;
@@ -29,12 +29,9 @@ const reportSchema = new Schema<IReport>(
       required: [true, "El dato es requerido."],
     },
     grade: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: "Grade",
       required: [true, "El dato es requerido."],
-    },
-    school: {
-      type: String,
-      required: true,
     },
     incidentDate: {
       type: Date,
@@ -48,15 +45,18 @@ const reportSchema = new Schema<IReport>(
       type: String,
       required: [true, "El dato es requerido."],
     },
-    incidentType: {
-      type: Schema.Types.ObjectId,
-      ref: "Incident",
-      required: [true, "El incidente es requerido."],
-    },
+    incidentType: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Incident",
+        required: [true, "El dato es requerido."],
+      },
+    ],
     injuries: [
       {
         type: Schema.Types.ObjectId,
         ref: "Injurie",
+        required: [true, "El dato es requerido."],
       },
     ],
     previousIncidents: {

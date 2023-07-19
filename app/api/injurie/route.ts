@@ -1,8 +1,5 @@
 import { NextResponse, NextRequest } from "next/server";
 import dbConnect from "@/app/db/connection";
-import Report from "@/app/models/Report";
-import Grade from "@/app/models/Grade";
-import Incident from "@/app/models/Incidents";
 import Injurie from "@/app/models/Injuries";
 
 dbConnect();
@@ -14,14 +11,14 @@ export async function POST(request: NextRequest) {
     console.log({ DataRequest: json });
 
     // Crear un nuevo objeto de cuenta bancaria con los datos parseados
-    const report = new Report(json);
-    console.log({ TransferCreated: report });
+    const injurie = new Injurie(json);
+    console.log({ TransferCreated: injurie });
 
     // Guardar el objeto de cuenta bancaria en la base de datos
-    const savedReport = await report.save();
+    const savedInjurie = await injurie.save();
 
     // Devolver un objeto NextResponse con los datos de la cuenta bancaria guardada y un código de estado 200
-    return new NextResponse(JSON.stringify(savedReport), {
+    return new NextResponse(JSON.stringify(savedInjurie), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
@@ -30,7 +27,7 @@ export async function POST(request: NextRequest) {
 
     // Si hay algún otro error, devolver un objeto NextResponse con un mensaje de error y un código de estado 500
     const error = {
-      message: "Error al ejecutar el reporte.",
+      message: "Error al ejecutar la herida.",
       error: err,
     };
     return new NextResponse(JSON.stringify(error), { status: 500 });
@@ -39,20 +36,12 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
-    const grade = await Grade.find();
-    const incidentType = await Incident.find();
-    const injuries = await Injurie.find();
-
     // Get all account types with related data
-    const report = await Report.find()
-      .populate("grade", "name")
-      .populate("incidentType", "name description")
-      .populate("injuries", "name description");
+    const injurie = await Injurie.find();
+    const data = injurie;
 
-    const data = report;
-
-    if (report.length === 0) {
-      return new NextResponse(JSON.stringify({ message: "No Reports Yet" }), {
+    if (injurie.length === 0) {
+      return new NextResponse(JSON.stringify({ message: "No Injuries Yet" }), {
         status: 200,
       });
     }

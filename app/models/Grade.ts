@@ -1,22 +1,17 @@
 import { Document, Schema, model, models } from "mongoose";
 
 // Interface for User document
-export interface IInjurie extends Document {
+export interface IGrade extends Document {
   name: string;
-  description: string;
   createdAt: Date;
   updatedAt: Date;
 }
 
 // Mongoose schema for User
-const injurieSchema = new Schema<IInjurie>(
+const gradeSchema = new Schema<IGrade>(
   {
     name: {
       type: String,
-    },
-    description: {
-      type: String,
-      required: true,
     },
     createdAt: {
       type: Date,
@@ -34,6 +29,6 @@ const injurieSchema = new Schema<IInjurie>(
 );
 
 // Create and export the User model
-const Injurie = models.Injurie || model<IInjurie>("Injurie", injurieSchema);
+const Grade = models.Grade || model<IGrade>("Grade", gradeSchema);
 
-export default Injurie;
+export default Grade;

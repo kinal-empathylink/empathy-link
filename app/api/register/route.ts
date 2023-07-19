@@ -31,6 +31,24 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Validating email domain
+    const allowedEmailDomains = ["kinal.edu.gt", "kinal.org.gt"];
+    const emailParts = json.email.split("@");
+    const emailDomain = emailParts[emailParts.length - 1];
+
+    if (!allowedEmailDomains.includes(emailDomain)) {
+      return new NextResponse(
+        JSON.stringify({
+          message:
+            "Only email addresses with domains @kinal.edu.gt and @kinal.org.gt are allowed",
+        }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+    }
+
     const usernameTaken = await User.findOne({ username: json.username });
 
     if (usernameTaken)
@@ -58,6 +76,13 @@ export async function POST(req: NextRequest) {
     const hashedPassword = await hashPassword(json.password);
 
     json.password = hashedPassword as string;
+
+    // Assigning role based on email domain
+    if (emailDomain === "kinal.edu.gt") {
+      json.role = "user";
+    } else if (emailDomain === "kinal.org.gt") {
+      json.role = "admin";
+    }
 
     const user = new User(json);
 
