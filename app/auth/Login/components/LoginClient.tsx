@@ -51,8 +51,8 @@ const LoginClient = () => {
         <div className="h-full w-[45%] max-lg:w-full bg-white">
             <div className="h-full w-full flex items-center justify-center mb-10 font-bold text-gray-900 dark:text-white">
                 <div>
-                    <div className="pb-8">
-                        <div  className="text-2xl max-lg:text-3xl max-sm:text-lg font-extrabold">
+                    <div className="pb-8 text-black">
+                        <div  className=" text-2xl max-lg:text-3xl max-sm:text-lg font-extrabold">
                             Bienvenido de vuelta!!
                         </div>
                         <div  className=" text-lg max-lg:text-xl max-sm:text-sm font-extralight pt-1">
@@ -98,11 +98,11 @@ const LoginClient = () => {
                             >
                                 Iniciar Sesión
                             </button>
-                            <p className="text-sm max-sm:text-xs pl-2 font-light text-gray-400 dark:text-gray-300">
+                            <p className="text-sm max-sm:text-xs pl-2 font-light text-gray-400">
                                 Aun no tienes cuenta?{" "}
                                 <Link
                                 href="/auth/Signup"
-                                className="font-medium text-sm max-sm:text-xs text-black hover:text-gray-600 dark:text-white dark:hover:text-gray-300 text-primary-600 hover:underline"
+                                className="font-medium text-sm max-sm:text-xs text-black hover:text-gray-600 hover:underline"
                                 >
                                 Registrate
                                 </Link>
