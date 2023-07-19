@@ -32,7 +32,7 @@ const LoginClient = () => {
         setResponseError(`${result.message}`)
         router.push("/auth/Login");
       } else{
-        router.push("/auth/Signup");
+        router.push("/home");
       }
 
   };
