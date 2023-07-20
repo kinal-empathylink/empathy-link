@@ -10,7 +10,11 @@ export async function LoginAction(data: {}) {
       headers: { "Content-Type": "application/json" },
     });
 
-    return await response.json();
+    const json = await response.json()
+
+    console.log({JSON: json})
+
+    return json;
   } catch (err) {
     console.log(err);
   }

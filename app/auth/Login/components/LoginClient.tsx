@@ -8,8 +8,8 @@ import { LoginAction } from "@/app/api/login/Actions";
 import { useRouter } from "next/navigation";
 
 const LoginClient = () => {
-  const inputUsername = useRef("");
-  const inputPassword = useRef("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [responseError, setResponseError] = useState("");
 
   const router = useRouter();
@@ -18,11 +18,11 @@ const LoginClient = () => {
     e.preventDefault();
 
     const data = { 
-        username: inputUsername.current, 
-        password: inputPassword.current 
+        username: username, 
+        password: password
     }
 
-    console.log(data);
+    console.log({DATA: data});
 
     const result = await LoginAction(data)
 
@@ -85,7 +85,7 @@ const LoginClient = () => {
                                     type="text"
                                     name="username"
                                     id="username"
-                                    onChange={(e) => (inputUsername.current = e.target.value)}
+                                    onChange={(e) => setUsername(e.target.value)}
                                     className="focus:outline-gray-400 border border-l-0 font-extralight border-gray-200 text-sm max-sm:text-xs rounded-full rounded-l-none w-80 h-14 max-lg:w-96 max-lg:h-16 max-sm:w-56 max-sm:h-10"
                                     placeholder="Correo electrónico"
                                 />
@@ -100,7 +100,7 @@ const LoginClient = () => {
                                     type="password"
                                     name="username"
                                     id="username"
-                                    onChange={(e) => (inputPassword.current = e.target.value)}
+                                    onChange={(e) => setPassword(e.target.value)}
                                     className="focus:outline-gray-400 border border-l-0 font-extralight border-gray-200 text-sm max-sm:text-xs rounded-full rounded-l-none w-80 h-14 max-lg:w-96 max-lg:h-16 max-sm:w-56 max-sm:h-10"
                                     placeholder="Contraseña"
                                 />
