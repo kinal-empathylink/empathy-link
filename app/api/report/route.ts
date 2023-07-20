@@ -12,7 +12,13 @@ export async function POST(request: NextRequest) {
 
     // Crear un nuevo objeto de cuenta bancaria con los datos parseados
     const report = new Report(json);
-    console.log({ TransferCreated: report });
+    console.log({ reportCreated: report });
+
+    if(!report.aggressor || !report.description || !report.incidentDate || !report.incidentType || !report.injuries){
+      return new NextResponse(JSON.stringify({message: "Todos los parametros son requeridos"}), {
+        status: 400
+      });
+    }
 
     // Guardar el objeto de cuenta bancaria en la base de datos
     const savedReport = await report.save();

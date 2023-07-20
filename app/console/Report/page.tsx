@@ -4,19 +4,6 @@ import { formatDate } from "@/app/tools/dayFormatter";
 import ReportRow from "./components/ReportRow";
 
 export default async function page(){
-
-    const incidentDate = new Date("2023-07-19");
-    const createdAt = new Date("2023-07-19");
-    const updatedAt = new Date("2023-07-19");
-
-    const dateTime = formatDate(incidentDate)
-    const createdAtDateTime = formatDate(createdAt)
-    const updatedAtDateTime = formatDate(updatedAt)
-
-    const formatedDate = `${dateTime.formatedDate} ${dateTime.formatedTime}`
-    const formatedCreatedAt = `${createdAtDateTime.formatedDate} ${createdAtDateTime.formatedTime}`
-    const formatedUpdatedAt = `${updatedAtDateTime.formatedDate} ${updatedAtDateTime.formatedTime}`
-
     const reports: IReport[] = await getReports();
 
     console.log({REPORTS: reports})
@@ -32,19 +19,16 @@ export default async function page(){
                         <thead className="text-xs">
                             <tr>
                                 <th scope="col" className="px-6 py-3">
+                                    Opciones
+                                </th>
+                                <th scope="col" className="px-6 py-3">
                                     Estado
                                 </th>
                                 <th scope="col" className="px-6 py-3">
-                                    Grado
+                                    Agresor
                                 </th>
                                 <th scope="col" className="px-6 py-3">
-                                    Fecha de Agresión
-                                </th>
-                                <th scope="col" className="px-6 py-3">
-                                    Descripcion
-                                </th>
-                                <th scope="col" className="px-6 py-3">
-                                    Testigos
+                                    Descripción
                                 </th>
                                 <th scope="col" className="px-6 py-3">
                                     Tipo de Incidente
@@ -55,27 +39,23 @@ export default async function page(){
                                 <th scope="col" className="px-6 py-3">
                                     Fecha de Reportado:
                                 </th>
-                                <th scope="col" className="px-6 py-3">
-                                    Fecha de Actualizado: 
-                                </th>
-                                <th scope="col" className="px-6 py-3">
-                                    Opciones
-                                </th>
                             </tr>
                         </thead>
                         <tbody>
                         {reports.map((report, key) => (
                             <ReportRow
                             key={key}
-                            status={"status"}
-                            grade={report.grade.toString()}
-                            incidentDate={report.incidentDate.toString()}
+                            _id={report._id}
+                            grade={report.grade}
+                            incidentDate={report.incidentDate}
                             description={report.description}
                             witnesses={report.witnesses}
-                            incidentType={report.incidentType.toString()}
-                            injuries={report.injuries.toString()}
-                            createdAt={report.createdAt.toString()}
-                            updatedAt={report.updatedAt.toString()}
+                            incidentType={report.incidentType}
+                            injuries={report.injuries}
+                            aggressor={report.aggressor}
+                            status={report.status}
+                            createdAt={report.createdAt}
+                            updatedAt={report.updatedAt}
                             />
                         ))}
                         </tbody>

@@ -2,14 +2,14 @@ import { Document, Schema, model, models } from "mongoose";
 
 // Interface for Report document
 export interface IReport extends Document {
-  age: number;
-  incidentDate?: Date;
+  grade?: string;
+  incidentDate: Date;
   description: string;
   witnesses?: string;
-  incidentType?: string;
-  injuries?: string;
-  aggressor?: string;
-  status?: string;
+  incidentType: string;
+  injuries: string;
+  aggressor: string;
+  status: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -17,12 +17,12 @@ export interface IReport extends Document {
 // Mongoose schema for Report
 const reportSchema = new Schema<IReport>(
   {
-    age: {
-      type: Number,
-      required: [true, "El dato es requerido."],
+    grade: {
+      type: String,
     },
     incidentDate: {
       type: Date,
+      required: true
     },
     description: {
       type: String,
@@ -33,16 +33,21 @@ const reportSchema = new Schema<IReport>(
     },
     incidentType: {
       type: String,
+      required: true
     },
     injuries: {
       type: String,
+      required: true
     },
     aggressor: {
       type: String,
+      required: true
     },
     status: {
       type: String,
+      required: true,
       enum: ["Pendiente", "Solucionado"],
+      default: "Pendiente"
     },
     createdAt: {
       type: Date,
