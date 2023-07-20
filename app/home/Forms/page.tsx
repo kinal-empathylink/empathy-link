@@ -12,28 +12,20 @@ const Formulario = () => {
             htmlFor="edad"
             className="block text-blue-800 font-semibold mb-2"
           >
-            Edad
+            Edad*
           </label>
           <input
             id="edad"
             name="edad"
             type="number"
+            min="1"
+            max="20"
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
           />
-        </div>
-        <div className="sm:col-span-1">
-          <label
-            htmlFor="grado"
-            className="block text-blue-800 font-semibold mb-2"
-          >
-            Grado
-          </label>
-          <select
-            id="grado"
-            name="grado"
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
-            defaultValue=""
-          ></select>
+          <p className="text-sm text-gray-600 mt-1">
+            Porfavor introduce tu edad para que asi podamos saber el mejor
+            metodo para ayudarte.
+          </p>
         </div>
         <div className="sm:col-span-1">
           <label
@@ -48,13 +40,16 @@ const Formulario = () => {
             type="date"
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
           />
+          <p className="text-sm text-gray-600 mt-1">
+            De ser posible introduce la fecha en la que la agresion dio lugar.
+          </p>
         </div>
         <div className="sm:col-span-2">
           <label
             htmlFor="descripcion"
             className="block text-blue-800 font-semibold mb-2"
           >
-            Descripción
+            Descripción*
           </label>
           <textarea
             id="descripcion"
@@ -62,6 +57,10 @@ const Formulario = () => {
             rows={4}
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
           />
+          <p className="text-sm text-gray-600 mt-1">
+            Comparte los detalles que consideres relevantes, no te preocupes por
+            la extensión.
+          </p>
         </div>
         <div className="sm:col-span-2">
           <label
@@ -76,6 +75,9 @@ const Formulario = () => {
             rows={4}
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
           />
+          <p className="text-sm text-gray-600 mt-1">
+            Si recuerdas el nombre de algún testigo, es útil incluirlo aquí.
+          </p>
         </div>
         <div className="sm:col-span-2">
           <label
@@ -90,6 +92,10 @@ const Formulario = () => {
             rows={4}
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
           />
+          <p className="text-sm text-gray-600 mt-1">
+            Describe el tipo de incidente que has experimentado (por ejemplo,
+            acoso, discriminación, etc.).
+          </p>
         </div>
         <div className="sm:col-span-2">
           <label
@@ -104,77 +110,28 @@ const Formulario = () => {
             rows={4}
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
           />
+          <p className="text-sm text-gray-600 mt-1">
+            Si sufriste heridas físicas o emocionales, menciona los detalles.
+          </p>
         </div>
         <div className="sm:col-span-2">
           <label
-            htmlFor="incidentesPrevios"
+            htmlFor="agresor"
             className="block text-blue-800 font-semibold mb-2"
           >
-            Incidentes previos
+            Agresor
           </label>
           <textarea
-            id="incidentesPrevios"
-            name="incidentesPrevios"
+            id="agresor"
+            name="agresor"
             rows={4}
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
           />
+          <p className="text-sm text-gray-600 mt-1">
+            Si te sientes cómodo haciéndolo, menciona detalles sobre el agresor.
+          </p>
         </div>
-        <div className="sm:col-span-2">
-          <label
-            htmlFor="impactoEmocional"
-            className="block text-blue-800 font-semibold mb-2"
-          >
-            Impacto emocional
-          </label>
-          <textarea
-            id="impactoEmocional"
-            name="impactoEmocional"
-            rows={4}
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
-          />
-        </div>
-        <div className="sm:col-span-2">
-          <label
-            htmlFor="impactoAcademico"
-            className="block text-blue-800 font-semibold mb-2"
-          >
-            Impacto académico
-          </label>
-          <textarea
-            id="impactoAcademico"
-            name="impactoAcademico"
-            rows={4}
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
-          />
-        </div>
-        <div className="sm:col-span-2">
-          <label
-            htmlFor="accionesPrevias"
-            className="block text-blue-800 font-semibold mb-2"
-          >
-            Acciones previas
-          </label>
-          <textarea
-            id="accionesPrevias"
-            name="accionesPrevias"
-            rows={4}
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
-          />
-        </div>
-        <div className="sm:col-span-2">
-          <label
-            htmlFor="accionesEscuela"
-            className="block text-blue-800 font-semibold mb-2"
-          >
-            Acciones de la escuela
-          </label>
-          <textarea
-            id="accionesEscuela"
-            name="accionesEscuela"
-            rows={4}
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
-          />
-        </div>
+
         <div className="sm:col-span-2 flex justify-center">
           <button
             type="submit"

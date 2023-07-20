@@ -11,7 +11,9 @@ export async function POST(req: NextRequest) {
 
     if (!json.username || !json.email) {
       return new NextResponse(
-        JSON.stringify({ message: "Username and email are required" }),
+        JSON.stringify({
+          message: "Nombre de usuario y contraseña requeridos",
+        }),
         {
           status: 400,
           headers: { "Content-Type": "application/json" },
@@ -22,7 +24,7 @@ export async function POST(req: NextRequest) {
     if (json.password.length < 6) {
       return new NextResponse(
         JSON.stringify({
-          message: "Password should be at least 8 characters long",
+          message: "La contraseña debe ser de al menos 6 caracteres",
         }),
         {
           status: 400,
@@ -40,7 +42,7 @@ export async function POST(req: NextRequest) {
       return new NextResponse(
         JSON.stringify({
           message:
-            "Only email addresses with domains @kinal.edu.gt and @kinal.org.gt are allowed",
+            "Unicamente se aceptan correos electrónicos con dominios @kinal.edu.gt y @kinal.org.gt",
         }),
         {
           status: 400,
@@ -53,7 +55,7 @@ export async function POST(req: NextRequest) {
 
     if (usernameTaken)
       return new NextResponse(
-        JSON.stringify({ message: "Username already exists" }),
+        JSON.stringify({ message: "El nombre de usuario ya existe" }),
         {
           status: 400,
           headers: { "Content-Type": "application/json" },
@@ -65,7 +67,7 @@ export async function POST(req: NextRequest) {
     if (emailTaken)
       return new NextResponse(
         JSON.stringify({
-          message: "Email already exists",
+          message: "Email ya en uso",
         }),
         {
           status: 400,
@@ -90,7 +92,7 @@ export async function POST(req: NextRequest) {
 
     console.log({ userSaved: user });
 
-    return new NextResponse(JSON.stringify({ message: "success", user }), {
+    return new NextResponse(JSON.stringify({ message: "Exitoso", user }), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
