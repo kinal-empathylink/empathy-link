@@ -1,6 +1,6 @@
 "use client";
 
-import React, { MouseEvent, useEffect, useRef, useState } from "react";
+import React, { MouseEvent, useRef, useState } from "react";
 import Link from "next/link";
 import { AiOutlineMail } from 'react-icons/ai';
 import { BiSolidLockAlt } from 'react-icons/bi';
@@ -114,7 +114,10 @@ const LoginClient = () => {
 
                             <button
                                 type="submit"
-                                onClick={(e) => onSubmit(e)}
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                    onSubmit(e)
+                                }}
                                 className="max-lg:h-16 max-sm:h-10 h-14 w-full text-white border font-extralight bg-blue-700 text-sm max-sm:text-xs rounded-full"
                             >
                                 Iniciar Sesión

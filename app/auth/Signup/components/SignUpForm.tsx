@@ -29,7 +29,7 @@ function SignUpForm() {
     const response:any = await SignUpAction(data)
     console.log(response);
 
-    if(response.message === "success" ){
+    if(response.message === "Exitoso" ){
       setResponseError("");
       router.push('/auth/Login');
     }else{

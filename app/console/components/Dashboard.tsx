@@ -5,15 +5,13 @@ import React from 'react'
 
 const Dashboard = () => {
   return (
-    <div>
-      <div className="w-full h-full">
+    <div className="w-full h-full">
       Dashboard
-    </div>
-    <Link
-      href="/console/Report"
-    >
-      REDIRECT REPORTS
-    </Link>
+      <Link
+        href="/console/Report"
+      >
+        REDIRECT REPORTS
+      </Link>
     </div>
   )
 }

@@ -34,7 +34,7 @@ const ReportForm = () => {
   }
 
   return (
-    <div className="bg-blue-50 p-8 rounded-md w-full h-screen">
+    <div className="bg-blue-50 p-8 rounded-md w-full h-fit">
       <h2 className="text-3xl font-bold text-center mb-6 text-blue-800">
         Reporte de Abuso
       </h2>
@@ -143,7 +143,7 @@ const ReportForm = () => {
             : 
             null
           }
-        <div className="sm:col-span-2 flex justify-center">
+        <div className="sm:col-span-2 flex justify-center gap-4">
           
           <button
             type="submit"
@@ -156,6 +156,20 @@ const ReportForm = () => {
           >
             Enviar
           </button>
+
+          <button
+            type="submit"
+            className="w-32 bg-red-600 hover:bg-red-500 text-white py-2 px-4 rounded-md focus:outline-none focus:ring focus:border-red-300"
+            onClick={(e)=>{
+              e.preventDefault()
+              router.replace("/home");
+              router.refresh();
+            }}
+            style={{ backgroundColor: "#FF413B" }}
+          >
+            Cancelar
+          </button>
+
         </div>
       </form>
     </div>

@@ -1,7 +1,7 @@
-import ReportForm from "./components/ReportForm";
+import HomePage from "./components/HomePage";
 
 export default function page(){
   return(
-    <ReportForm/>
+    <HomePage/>
   )
 }
