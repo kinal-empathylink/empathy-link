@@ -27,7 +27,7 @@ function SignUpForm() {
     e.preventDefault();
     
     const response:any = await SignUpAction(data)
-    console.log(response);
+    console.log({RESPONSE: response});
 
     if(response.message === "Exitoso" ){
       setResponseError("");
