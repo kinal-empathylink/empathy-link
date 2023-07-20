@@ -1,34 +1,49 @@
 "use client";
 
-import React, { MouseEvent, useRef } from "react";
-import { signIn } from "next-auth/react";
-import Image from "next/image";
+import React, { MouseEvent, useRef, useState } from "react";
 import Link from "next/link";
 import { AiOutlineMail } from 'react-icons/ai';
 import { BiSolidLockAlt } from 'react-icons/bi';
+import { LoginAction } from "@/app/api/login/Actions";
+import { useRouter } from "next/navigation";
 
 const LoginClient = () => {
   const inputUsername = useRef("");
   const inputPassword = useRef("");
+  const [responseError, setResponseError] = useState("");
+
+  const router = useRouter();
 
   const onSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    console.log({ user: inputUsername.current, pass: inputPassword.current });
+    const data = { 
+        username: inputUsername.current, 
+        password: inputPassword.current 
+    }
 
-    const result = await signIn("credentials", {
-      username: inputUsername.current,
-      password: inputPassword.current,
-      redirect: true,
-      callbackUrl: "/home",
-    });
+    console.log(data);
 
-    console.log({ result: result });
+    const result = await LoginAction(data)
+
+    console.log({RESULT: result})
+
+    if (!result.username) {
+        setResponseError(`${result.message}`)
+        router.push("/auth/Login");
+      } else{
+        if(result.role == "admin"){
+            router.push("/console");
+        }else{
+            router.push("/home");
+        }
+      }
+
   };
   return (
     <div className="flex h-screen w-full">
         <div className="h-full w-[55%] max-lg:w-0 bg-blue-700 ">
-        <div className="h-full w-full flex items-center justify-center mb-10 font-bold text-gray-900 dark:text-white">
+        <div className="h-full w-full flex items-center justify-center mb-10 font-bold text-gray-900">
                 <div>
                     <div className="-ml-32 text-white">
                         <div  className="text-4xl font-extrabold">
@@ -39,7 +54,6 @@ const LoginClient = () => {
                         </div>
                         <button
                                 type="submit"
-                                onClick={(e) => onSubmit(e)}
                                 className="h-8 px-5 w-40 text-white font-extralight bg-blue-500 text-xs rounded-full mt-4"
                             >
                                 Mas información
@@ -49,7 +63,7 @@ const LoginClient = () => {
             </div>
         </div>
         <div className="h-full w-[45%] max-lg:w-full bg-white">
-            <div className="h-full w-full flex items-center justify-center mb-10 font-bold text-gray-900 dark:text-white">
+            <div className="h-full w-full flex items-center justify-center mb-10 font-bold text-gray-900">
                 <div>
                     <div className="pb-8 text-black">
                         <div  className=" text-2xl max-lg:text-3xl max-sm:text-lg font-extrabold">
@@ -72,7 +86,7 @@ const LoginClient = () => {
                                     name="username"
                                     id="username"
                                     onChange={(e) => (inputUsername.current = e.target.value)}
-                                    className="border border-l-0 font-extralight border-gray-200 text-sm max-sm:text-xs rounded-full rounded-l-none w-80 h-14 max-lg:w-96 max-lg:h-16 max-sm:w-56 max-sm:h-10"
+                                    className="focus:outline-gray-400 border border-l-0 font-extralight border-gray-200 text-sm max-sm:text-xs rounded-full rounded-l-none w-80 h-14 max-lg:w-96 max-lg:h-16 max-sm:w-56 max-sm:h-10"
                                     placeholder="Correo electrónico"
                                 />
                             </div>
@@ -83,17 +97,27 @@ const LoginClient = () => {
                                     </div>
                                 </div>
                                 <input
-                                    type="text"
+                                    type="password"
                                     name="username"
                                     id="username"
-                                    onChange={(e) => (inputUsername.current = e.target.value)}
-                                    className="border border-l-0 font-extralight border-gray-200 text-sm max-sm:text-xs rounded-full rounded-l-none w-80 h-14 max-lg:w-96 max-lg:h-16 max-sm:w-56 max-sm:h-10"
+                                    onChange={(e) => (inputPassword.current = e.target.value)}
+                                    className="focus:outline-gray-400 border border-l-0 font-extralight border-gray-200 text-sm max-sm:text-xs rounded-full rounded-l-none w-80 h-14 max-lg:w-96 max-lg:h-16 max-sm:w-56 max-sm:h-10"
                                     placeholder="Contraseña"
                                 />
                             </div>
+                            
+                            {responseError !== "" ? (
+                                <h1 className="text-red-600 text-sm px-2 font-medium italic">
+                                {responseError}
+                                </h1>
+                            ) : null}
+
                             <button
                                 type="submit"
-                                onClick={(e) => onSubmit(e)}
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                    onSubmit(e)
+                                }}
                                 className="max-lg:h-16 max-sm:h-10 h-14 w-full text-white border font-extralight bg-blue-700 text-sm max-sm:text-xs rounded-full"
                             >
                                 Iniciar Sesión

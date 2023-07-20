@@ -10,12 +10,13 @@ export async function POST(req: NextRequest) {
   try {
     const json: IUser = await req.json();
 
+      console.log({JSON: json})
     const parse = JSON.parse(JSON.stringify(json));
 
     console.log({ PARSE: parse });
 
     if (!parse) {
-      return new NextResponse(JSON.stringify({ message: "Invalid data" }), {
+      return new NextResponse(JSON.stringify({ message: "Datos Inválidos" }), {
         status: 400,
       });
     }
@@ -27,14 +28,14 @@ export async function POST(req: NextRequest) {
 
     if (credentials.username.length < 3) {
       return new NextResponse(
-        JSON.stringify({ message: "Username too short" }),
+        JSON.stringify({ message: "Nombre de usuario muy corto" }),
         { status: 400 }
       );
     }
 
     if (credentials.password.length < 6) {
       return new NextResponse(
-        JSON.stringify({ message: "Password too short" }),
+        JSON.stringify({ message: "Contraseña muy corta" }),
         { status: 400 }
       );
     }
@@ -42,9 +43,12 @@ export async function POST(req: NextRequest) {
     const user = await User.findOne({ username: json.username });
 
     if (!user)
-      return new NextResponse(JSON.stringify({ message: "User not found" }), {
-        status: 404,
-      });
+      return new NextResponse(
+        JSON.stringify({ message: "Usuario no encontrado" }),
+        {
+          status: 404,
+        }
+      );
 
     const isPasswordValid = await comparePassword(
       credentials.password,
@@ -52,9 +56,12 @@ export async function POST(req: NextRequest) {
     );
 
     if (!isPasswordValid) {
-      return new NextResponse(JSON.stringify({ message: "Invalid password" }), {
-        status: 401,
-      });
+      return new NextResponse(
+        JSON.stringify({ message: "Contraseña Inválida" }),
+        {
+          status: 401,
+        }
+      );
     }
 
     const token = await JWT(user);

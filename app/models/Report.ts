@@ -1,22 +1,15 @@
 import { Document, Schema, model, models } from "mongoose";
-import { IInjurie } from "./Injuries";
-import { IIncident } from "./Incidents";
-import { IGrade } from "./Grade";
 
 // Interface for Report document
 export interface IReport extends Document {
-  age: number;
-  grade: IGrade["_id"];
+  grade?: string;
   incidentDate: Date;
   description: string;
-  witnesses: string;
-  incidentType: IIncident[];
-  injuries: IInjurie[];
-  previousIncidents: string;
-  emotionalImpact: string;
-  academicImpact: string;
-  previousActions: string;
-  schoolActions: string;
+  witnesses?: string;
+  incidentType: string;
+  injuries: string;
+  aggressor: string;
+  status: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -24,18 +17,12 @@ export interface IReport extends Document {
 // Mongoose schema for Report
 const reportSchema = new Schema<IReport>(
   {
-    age: {
-      type: Number,
-      required: [true, "El dato es requerido."],
-    },
     grade: {
-      type: Schema.Types.ObjectId,
-      ref: "Grade",
-      required: [true, "El dato es requerido."],
+      type: String,
     },
     incidentDate: {
       type: Date,
-      required: [true, "El dato es requerido."],
+      required: true
     },
     description: {
       type: String,
@@ -43,41 +30,24 @@ const reportSchema = new Schema<IReport>(
     },
     witnesses: {
       type: String,
-      required: [true, "El dato es requerido."],
     },
-    incidentType: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Incident",
-        required: [true, "El dato es requerido."],
-      },
-    ],
-    injuries: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Injurie",
-        required: [true, "El dato es requerido."],
-      },
-    ],
-    previousIncidents: {
+    incidentType: {
       type: String,
-      required: [true, "El dato es requerido."],
+      required: true
     },
-    emotionalImpact: {
+    injuries: {
       type: String,
-      required: [true, "El dato es requerido."],
+      required: true
     },
-    academicImpact: {
+    aggressor: {
       type: String,
-      required: [true, "El dato es requerido."],
+      required: true
     },
-    previousActions: {
+    status: {
       type: String,
-      required: [true, "El dato es requerido."],
-    },
-    schoolActions: {
-      type: String,
-      required: [true, "El dato es requerido."],
+      required: true,
+      enum: ["Pendiente", "Solucionado"],
+      default: "Pendiente"
     },
     createdAt: {
       type: Date,
