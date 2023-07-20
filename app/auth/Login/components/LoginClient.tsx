@@ -32,7 +32,11 @@ const LoginClient = () => {
         setResponseError(`${result.message}`)
         router.push("/auth/Login");
       } else{
-        router.push("/home");
+        if(result.role == "admin"){
+            router.push("/console");
+        }else{
+            router.push("/home");
+        }
       }
 
   };
