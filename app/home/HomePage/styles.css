@@ -1,0 +1,123 @@
+.container1{
+    /*background-color: blue;*/
+    margin-left: 40px;
+    display: flex;
+    flex-direction:row;
+    justify-content: space-between;
+}
+
+.titles{
+    width: 50%;
+}
+
+.title1{
+    font-size: 35px;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+.title2{
+    font-size: 35px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #7bb4e3;
+    
+}
+
+.ImageHand{
+    width: 500px;
+    height: 300px;
+    
+    padding-right: 40px;
+}
+
+.contBoton{
+    height: 60px;
+}
+
+.rounded-full {
+    background-color: #7bb4e3;
+    height: 100%;
+    width: 60%;
+    color: white;
+}
+
+.container2{
+    background-color: #dbdbdb;
+    height: 250px;
+    width: 100%;
+    display: flex;
+    flex-direction:row;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+}
+
+.imageCard{
+    width: 30%;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+    position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+    /*margin-left: 50px*/
+}
+
+.imageCardContent{
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.imageCardMain{
+    position: relative;
+}
+
+.imageCardMain p{
+    font-size: large;
+}
+
+.titlefinal{
+    font-size: 35px;
+    font-family: Arial, Helvetica, sans-serif;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    
+}
+
+.titlefinal h1{
+    background-color: #7bb4e3;
+    width: 100%;
+    color: white;
+}
+
+.parrafoFinal{
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-left: 140px;
+    margin-right: 140px;
+}
+
+.finalCard{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.individualCards{
+    background-color: #d3f68b;
+    padding: 5px;
+}
+
+.black{
+    background-color: black;
+    width: 100%;
+}
