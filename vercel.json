@@ -1,8 +1,0 @@
-{
-    "env": {
-      "MONGO_URI": "mongodb+srv://kinalempathylink:kinalempathylink@cluster0.tu04eam.mongodb.net/?retryWrites=true&w=majority",
-      "MONGO_DB": "kinal-empathylink",
-      "NEXTAUTH_SECRET": "grupoSeminario",
-      "NEXTAUTH_URL": "http://localhost:3000"
-    }
-  }
