@@ -1,9 +1,6 @@
 import { NextResponse, NextRequest } from "next/server";
 import dbConnect from "@/app/db/connection";
 import Report from "@/app/models/Report";
-import Grade from "@/app/models/Grade";
-import Incident from "@/app/models/Incidents";
-import Injurie from "@/app/models/Injuries";
 
 dbConnect();
 
@@ -39,15 +36,8 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
-    const grade = await Grade.find();
-    const incidentType = await Incident.find();
-    const injuries = await Injurie.find();
-
     // Get all account types with related data
-    const report = await Report.find()
-      .populate("grade", "name")
-      .populate("incidentType", "name description")
-      .populate("injuries", "name description");
+    const report = await Report.find();
 
     const data = report;
 
