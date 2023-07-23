@@ -3,8 +3,7 @@ import Maintenance from "./components/Maintenance";
 
 export default function Home() {
   return (
-    // redirect("/maintenance")
+    redirect("/auth/Login")
 
-    <Maintenance/>
   )
 }
