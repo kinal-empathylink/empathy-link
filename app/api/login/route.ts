@@ -4,9 +4,11 @@ import { comparePassword } from "@/app/tools/encrypt";
 import { JWT } from "@/app/tools/jwt";
 import dbConnect from "@/app/db/connection";
 
-dbConnect();
 
 export async function POST(req: NextRequest) {
+
+  await dbConnect();
+
   try {
     const json: IUser = await req.json();
 

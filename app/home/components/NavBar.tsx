@@ -1,35 +1,64 @@
-import Link from 'next/link'
-import React from 'react'
+"use client";
+
+import React, { useEffect, useState } from "react";
+
+import { Montserrat } from "next/font/google";
+import Link from "next/link";
+import Image from "next/image";
+import kinalImg from "@/public/Images/KINAL_NAV.webp";
+
+const montserrat = Montserrat({
+  weight: "500",
+  style: "normal",
+  subsets: ["latin"],
+});
 
 const NavBar = () => {
-  return (
-    <div className="fixed bg-white w-full z-10">
-        <nav className="border-b border-gray-200">
-          <div className="h-[80px] flex justify-between">
-            <div className='p-3 w-full h-full flex justify-between text-center'>
-                    <div className='flex text-center h-full sm:pl-10 text-2xl max-sm:text-xl text-blue-600 font-extrabold'>
-                        <Link href="/home" className='no-underline flex h-full text-center'>Empathy Link</Link>
-                    </div>
-                    <div className='h-full sm:text-lg max-sm:text-xs text-black'>
-                        <div className='flex max-sm:gap-2 gap-20 sm:pr-10 text-center pr-14'>
-                            <Link
-                                href="/auth/Login"
-                                className="text-gray-800 no-underline hover:underline hover:underline-offset-4 hover:text-blue-600">
-                                Iniciar Sesión
-                            </Link>
-                            <Link
-                                href="/home/Report"
-                                className="text-gray-800 no-underline hover:underline hover:underline-offset-4 hover:text-blue-600">
-                                Haz un reporte
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </div>
-        
-  )
-}
+  const [navPosition, setNavPosition] = useState("absolute py-5 px-6");
+  const [textClass, setTextClass] = useState(
+    "text-blue-100 text-2xl font-medium"
+  );
+  const [title, setTilte] = useState("opacity-0");
 
-export default NavBar
+  useEffect(() => {
+    const handlScroll = () => {
+      if (window.scrollY > 0) {
+        setNavPosition(
+          "fixed p-4 bg-black/50 backdrop-blur-md backdrop-saturate-200"
+        );
+        setTextClass("text-white text-xl");
+        setTilte("text-white text-xl");
+      } else {
+        setNavPosition("absolute py-5 px-6");
+        setTextClass("text-blue-100 text-2xl font-medium");
+        setTilte("opacity-0");
+      }
+    };
+
+    window.addEventListener("scroll", handlScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handlScroll);
+    };
+  }, []);
+
+  return (
+    <nav
+      className={`${navPosition} transition-all top-0 inset-x-0 z-50 w-full`}
+    >
+      <ul className="flex justify-between items-center w-full">
+        <li>
+          <Image src={kinalImg} width={150} height={150} alt="Kinal Empathy" />
+        </li>
+        <li className={`${montserrat.className} ${title}`}>
+          KINAL EMPATHY LINK
+        </li>
+        <li className={`${montserrat.className} ${textClass}`}>
+          <Link href="/home/Report">REPORTES</Link>
+        </li>
+      </ul>
+    </nav>
+  );
+};
+
+export default NavBar;

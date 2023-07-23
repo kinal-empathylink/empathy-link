@@ -1,11 +1,9 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css"
-import "./styles.css"
-import imagenMano from "../../../public/Images/hand.png"
-import apreton from "../../../public/Images/apreton.png"
-import estadisticas from "../../../public/Images/graficas.png"
-import grupo from "../../../public/Images/grupo.png"
-import reporte from "../../../public/Images/reporte.png"
+import imagenMano from "@/public/Images/hand.png"
+import apreton from "@/public/Images/apreton.png"
+import estadisticas from "@/public/Images/graficas.png"
+import grupo from "@/public/Images/grupo.png"
+import reporte from "@/public/Images/reporte.png"
 import Image from 'next/image'; 
 import Link from "next/link";
 
